@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: blueviolet;
+        }
+        h1{
+            color:silver;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selamat datang EJS <%= link %> </h1>
+    <% for(i=0;i<3;i++){  %>
+        <p>nama : <%= peopleEjs.nama[i] %></p>
+        <p>usia : <%= peopleEjs.usia[i] %></p>
+    <% } %>
+</body>
+</html>
