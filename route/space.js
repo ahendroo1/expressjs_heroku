@@ -1,6 +1,6 @@
 var routerSpace = require('express').Router();
 
-routerSpace.get('/data', (req, res)=>{
+routerSpace.get('/get_nodata', (req, res)=>{
     res.send('get ke index');
 });
 

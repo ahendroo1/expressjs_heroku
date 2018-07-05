@@ -1,42 +1,44 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var routerSpace = require('./route/space');
+var cors = require('cors');
+var lowdb = require('lowdb');
+var FSync = require('lowdb/adapters/FileSync');
+var adapter = new FSync('db.json');
+var db = lowdb(adapter);
 var app = express();
-app.set('view engine', 'ejs');
 
-app.get('/api/:xnow', (req, res)=>{
-    var poeple = [{
-        "nama":"doni",
-        "usia":"21"
-    },
-    {
-        "nama":"sony",
-        "usia":"29"
-        
-    }];
-
-    res.render('index_ejs', {peopleEjs:people, link:req.params.xnow});
-});
+app.use(bodyParser.json());
+app.use(routerSpace);
+app.use(cors(0));
+// db.defaults({
+//     dataSaya:[]
+// }).write();
 
 app.get('/', (req, res)=>{
-    res.sendFile(__dirname + '/index.html');
-    // res.send('Home Selamat datang');
-
+    res.send({status: 'get'})
 });
 
-app.get('/info', (req, res)=>{
-    res.send('kknkjnsxs');
-    // res.send('Home Selamat datang');
+app.get('/:', (req, res)=>{
+    res.send({status: 'get : ' + req.url})
 });
 
-// json getLink
-// app.get('/:id', (req, res)=>{
+app.post('/post_data', (req, res)=>{
+    console.log(req.body);
+        
+        // db.get('dataku')
+        // .push({
+        //     nama: req.body.nama,
+        //     usia: req.body.usia
+        // }).write();
+        
+    res.send({
 
-//     res.sendFile(__dirname + '/index.json');
-// });
+        nama_lengkap: req.body.nama,
+        email: req.body.kota
 
-// app.get('/api/:nama', (req, res)=>{
-
-//     res.send('get ke Api : ' + req.params.nama);
-// });
+    }) 
+});
 
 app.listen(3210, ()=> {
     console.log('Server @port 3210');
